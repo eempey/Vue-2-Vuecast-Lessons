@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+    	<h1>{{ message }}</h1>
+
+    	<input type="text" v-model="message">
+    </div>
+
+	<div id="texty">
+		<span class="error" v-show="!message">
+			You must enter a message
+		</span>
+	
+		<textarea v-model='message' name="" id="" cols="30" rows="10"></textarea>
+		<button type="submit">Send Message</button>
+
+		<pre>
+			{{ $data | json }}
+		</pre>
+	</div>
+
+	<div id="submitter" class="col-md-12">
+		<form action="" @click.prevent="updateCount">
+			<button class="btn btn-primary" type="submit">{{ count }}</button>
+		</form>
+	</div>
+	
+	
+
+	<script>
+		new Vue({
+			el: "#submitter",
+			data: {
+				count: 0
+			},
+			methods: {
+				updateCount: function(){
+					this.count += 1;
+				}
+			}
+
+		});
+	
+		new Vue({
+			el: "#app",
+			data: {
+				message: 'Hello World'
+			}
+		});
+
+		new Vue({
+			el: '#texty',
+			data: {
+				message: ''
+			}
+		});
+	</script>
+
+  </body>
+</html>

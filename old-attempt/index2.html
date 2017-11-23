@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Learnin</title>
+
+	<link rel="stylesheet" href="https://cdnjs.com/libraries/bulma">
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.7/vue.js"></script>
+	<div id="app">
+		<h1>{{ message }} </h1>
+
+		<input v-model="message">
+
+		<pre>
+		
+		</pre>
+
+
+		<form @submit.prevent="handleIt">
+			<span class="error" v-show="!errormessage">
+				You must enter a message
+			</span>
+
+			<textarea v-model="errormessage" name="" id="">
+				
+			</textarea>
+
+			<button type="sumbit" v-if="errormessage">
+				Send Message
+			</button>
+
+		</form>
+		<br>
+		{{ message }}
+
+		<counter></counter> <counter></counter>
+
+
+
+	</div>
+
+		<template id="counter-template">
+			<div>
+				<h1>Heading</h1>
+				<button @click="count += 1"> Increment {{ count }} </button>
+			</div>
+		</template>
+	
+
+	<script>
+
+
+		Vue.component('counter', {
+			template: '#counter-template',
+
+			data: function(){
+				return {count: 0}
+			}
+		});
+
+		var thing = {
+			message: 'Hello World',
+			errormessage: ""
+			//count: 0
+		};
+
+		new Vue({
+			el: '#app',
+			data: thing,
+
+
+			methods: {
+				handleIt: function(){
+					alert('Handled');
+
+				},
+				updateCount: function(){
+					this.count += 1;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

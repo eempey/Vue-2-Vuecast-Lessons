@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Custom events &amp; Components</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.7/vue.js"></script>
+</head>
+<body>
+	<div id="root" class="container">
+		<coupon @applied="onCouponApplied"></coupon>
+		<p v-if="couponApplied">Here it is</p>
+
+	</div>
+	<script>
+		window.Event = new Vue();
+
+		Vue.component('coupon', {
+			template: '<input @blur="onCouponApplied">',
+
+			methods:{
+				onCouponApplied(){
+					Event.$emit('applied');
+				}
+			}
+		});
+
+		new Vue({
+			el: "#root",
+
+			data: {
+				couponApplied: false
+			},
+
+			created(){
+				Event.$on('applied', () => alert('Handling it'));
+			}
+		});
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.7/vue.js"></script>
+</head>
+<body>
+	<div id="root" class="container">
+		<modal v-if="showModal" @close="showModal = false">Here is some text</modal>
+
+		<message title="Hello World" body="lorem ipsum"></message>
+
+		<message title="And another thing" body="Simon do your work"></message>
+
+		<button class="button" @click="showModal = true">Show Modal</button>
+
+
+		<tabs>
+			<tab name="About Us" :selected="true">
+				<h1>Here is the content for the About Us tab</h1>
+			</tab>
+
+			<tab name="About Our Culture">
+				<h1>Here is the content for the About Our Culture tab</h1>
+			</tab>
+
+			<tab name="About Our Vision">
+				<h1>Here is the content for the About Our Vision tab</h1>
+			</tab>
+		</tabs>	
+
+
+
+	</div>
+
+	<script>
+		Vue.component('tabs', {
+			template: `
+				<div>
+					<div class="tabs">
+						<ul>
+							<li v-for="tab in tabs" :class="{ 'is-active': tab.isActive }"><a :href="tab.href" @click="selectTab(tab)">{{ tab.name }}</a></li>
+						</ul>
+					</div>
+
+					<div class="tabs-details">
+						<slot></slot>
+					</div>
+				</div>
+			`,
+
+			data(){
+				return { tabs: [] }
+			},
+
+			created(){
+				this.tabs = this.$children;
+			},
+
+			methods: {
+				selectTab(selectedTab){
+					this.tabs.forEach(tab => {
+						tab.isActive = (tab.name == selectedTab.name);
+					});
+				}
+			}
+		});
+
+		Vue.component('tab', {
+			props: {
+				name: { required: true },
+				selected: {default: false}
+			},
+
+			template: `
+				<div v-show="isActive"><slot></slot></div>
+			`,
+
+			data(){
+				return {isActive: false}
+			},
+
+			computed:{
+				href(){
+					return '#' + this.name.toLowerCase().replace(/ /g, '-');
+				}
+			},
+
+			mounted(){
+				this.isActive = this.selected;
+			}
+		});
+
+		Vue.component('modal',{
+			template: `
+				<div class="modal is-active">
+					<div class="modal-background"></div>
+					<div class="modal-content">
+						<div class="box"><p><slot></slot></p></div>
+						
+					</div>
+					<button class="modal-close" @click="$emit('close')"></button>
+				</div>
+			`
+		}),
+		
+
+		Vue.component('message', {
+			props: ['title', 'body'],
+
+			data(){
+				return {
+					isVisible: true
+				};
+			},
+
+			template: `
+				<article class="message" v-show="isVisible">
+					<div class="message-header">
+						{{ title }}
+						<button @click="hideModal" class="button is-danger">X</button>
+					</div>
+					<div class="message-body">
+						{{ body }}
+					</div>
+				</article>
+			`,
+
+			methods:{
+				hideModal(){
+					this.isVisible = false
+				}
+			}
+		})
+
+		new Vue({
+			el: '#root',
+
+			data: {
+				showModal: false
+			}
+		});
+
+	</script>
+	
+</body>
+</html>

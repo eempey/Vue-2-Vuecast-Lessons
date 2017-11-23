@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Lesson One</title>
+	<link rel="stylesheet" href="">
+	<style>
+		.is-loading {
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="root">
+		<input type="text" id="input" v-model="message">
+
+		<p>The value of the input is {{ message }} </p>
+
+		<ul>
+			<li v-for="name in names" v-text="name"> </li>
+		</ul>
+
+		<input type="text" v-model="newName">
+		<button @click="addName" >Add name</button>
+
+		<button :title="title">Hover over me</button>
+
+		<button :class="{ 'is-loading' : isLoading }" 
+				@click='toggleClass'
+				:disabled="isDisabled"
+				>Click me</button>
+	</div>
+	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.js"></script>
+
+	<script>
+
+		var app = new Vue({
+			el: '#root',
+			data: {
+				message: 'Hello World',
+				names: ['Joe', 'Mary', 'Jane', 'Jack'],
+				newName: '',
+				title: "Now the title is being set through javascript",
+				isLoading: false,
+				isDisabled: true
+			},
+
+			methods: {
+				addName(){
+					this.names.push(this.newName);
+					this.newName = "";
+					this.isDisabled = false;
+				},
+				toggleClass(){
+					this.isLoading = true;
+				}
+			},
+
+			mounted(){
+
+			}
+		})
+
+	</script>	
+</body>
+</html>
