@@ -46,6 +46,8 @@ class ProjectsController extends Controller
             'name' => request('name'),
             'description' => request('description')
         ]);
+
+        return ['message' => 'Project Created'];
     }
 
     /**
