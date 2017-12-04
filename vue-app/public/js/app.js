@@ -1,5 +1,5 @@
-if(document.getElementById('root')){
-	var welcomepage = new Vue({
+
+/*	var welcomepage = new Vue({
 	el: "#root",
 
 	data: {
@@ -10,6 +10,25 @@ if(document.getElementById('root')){
 		axios.get('skills').then(response => this.skills = response.data);
 	}
 });
+*/
+class Form{
+	constructor(data){
+		this.data = data;
+
+		for(let field in data){
+			this[field] = data[field];
+		}
+
+		this.errors = new Errors();
+	}
+
+	reset(){
+
+	}
+
+	submit(){
+
+	}
 }
 
 
@@ -45,14 +64,15 @@ var formObject = new Vue({
 	el: "#app",
 
 	data: {
-		name: "",
-		description: "",
-		errors: new Errors()
+		form: new Form({
+			name: "",
+			description: "",
+		})
 	},
 
 	methods: {
 		onSubmit(){
-			axios.post('/vue/vue-app/public/projects', this.$data)
+			axios.post('/projects', this.$data)
 			.then(this.onSuccess)
 			.catch(error => this.errors.record(error.response.data.errors));
 		},

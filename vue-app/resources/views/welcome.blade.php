@@ -12,7 +12,7 @@
     <body>
 
         <div id="root">
-            
+            <h1>Is this thing on?</h1>
             <ul>
                 <li v-for="skill in skills">@{{ skill }} </li>
             </ul>
