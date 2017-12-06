@@ -10,7 +10,9 @@
 
 <body>
     <div id="app" class="container">
-        @include ('projects.list')      
+        @include ('projects.list')
+
+        <example></example>      
 
         <form method="POST" action="{{action('ProjectsController@index')}}" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
             {{ csrf_field() }}
@@ -36,9 +38,8 @@
         </form>
     </div>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.js"></script>
-       <script src="{{ url('js/app.js') }}"></script>
+    <script src="{{ url('js/vendor.js') }}"></script>
+    <script src="{{ url('js/app.js') }}"></script>
 
     </body>
 </html>
