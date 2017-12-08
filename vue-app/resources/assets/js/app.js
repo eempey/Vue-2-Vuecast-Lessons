@@ -30,6 +30,8 @@ import Form from './core/Form';
 
 import Example from './components/Example';
 
+import ExampleComponent from './components/ExampleComponent.vue';
+
 
 window.axios = axios;
 
@@ -55,4 +57,10 @@ var formObject = new Vue({
 			.then(data => console.log(data));
 		}
 	}
+});
+
+var exampleVue = new Vue({
+	el: "#app",
+
+	components: { 'example-component' : ExampleComponent }
 });

@@ -39,7 +39,7 @@
     </div>
 
     <script src="{{ url('js/vendor.js') }}"></script>
-    <script src="{{ url('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     </body>
 </html>
