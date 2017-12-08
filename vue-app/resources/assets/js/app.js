@@ -89,3 +89,11 @@ new Vue({
 	}
 
 });
+
+new Vue({
+	el: '#custom-input',
+
+	data: {
+		coupon: 'FREEBIE'
+	}
+})

@@ -792,6 +792,14 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 });
 
+new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+	el: '#custom-input',
+
+	data: {
+		coupon: 'FREEBIE'
+	}
+});
+
 /***/ }),
 /* 12 */,
 /* 13 */,
