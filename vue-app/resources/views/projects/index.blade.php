@@ -21,7 +21,8 @@
 	</div>
 
 	<div id="custom-input">
-		<input type="text" v-model="coupon">
+
+		<coupon v-model="coupon"></coupon>
 	</div>
 	<script src="{{ mix('js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>
